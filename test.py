@@ -1,5 +1,5 @@
 import operator
-
+import easyocr
 from PIL import Image
 from operator import itemgetter
 
@@ -8,9 +8,6 @@ im = im.convert("P")
 his = im.histogram()
 
 values = {}
-
-for i in range(256):
-    values[i] = his[i]
-
-for j,k in sorted(values.items(), key=operator.itemgetter(1), reverse=True)[:10]:
-    print (j,k)
+reader = easyocr.Reader(['en'])
+result = reader.readtext('output.jpg')
+print(result)
